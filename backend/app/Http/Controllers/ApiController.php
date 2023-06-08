@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User; 
+use App\Events\user_tb_data; 
 
 use Illuminate\Support\Facades\DB; // Import the DB class
 
@@ -15,6 +16,7 @@ class ApiController extends Controller
         $User->username = $request->input('username');
         $User->password = $request->input('password');
         $User->save();
+        broadcast(new user_tb_data());
         return response()->json($User);
     }
 

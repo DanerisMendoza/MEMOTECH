@@ -47,6 +47,15 @@
 
         },
 
+        mounted(){
+
+        window.Echo.channel('channel-user_tb_data').listen('user_tb_data',(e) => {
+            this.users = e.result;
+        });
+
+        },
+
+
         
     }
 </script>
