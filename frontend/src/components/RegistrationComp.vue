@@ -1,28 +1,24 @@
 <template>
     <div>
         <h1>Register Here</h1>
-        <input type="text" placeholder="fname" ref="fname">
-        <input type="text" placeholder="lname" ref="lname">
-        <input type="text" placeholder="email" ref="email">
+        <input type="text" placeholder="username" ref="username">
         <input type="password" placeholder="password" ref="password">
         <button @click="submit" class="btn btn-success">Submit</button>
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from '../axiosConfig';
 
     export default {
         methods: {
             submit() {
                 const data = {
-                    fname: this.$refs.fname.value,
-                    lname: this.$refs.lname.value,
-                    email: this.$refs.email.value,
+                    username: this.$refs.username.value,
                     password: this.$refs.password.value
                 };
 
-                axios.post('/api/createStudent', data)
+                axios.post('/api/createUser', data)
                     .then(response => {
                         // Handle success response
                         console.log('Insert Success!');

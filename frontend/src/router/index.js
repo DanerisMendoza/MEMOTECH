@@ -7,11 +7,13 @@ const routes = [
     path: '/',
     redirect: { name: 'Index' } // Redirect to the named route
   },
+
   {
     path: '/Index',
     name: 'Index',
     component: Index
   },
+
   {
     path: '/AccountManagement',
     name: 'AccountManagement',
