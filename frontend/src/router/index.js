@@ -6,7 +6,7 @@ import Login from '../views/Login.vue'
 const routes = [
   {
     path: '/',
-    redirect: { name: 'Index' } // Redirect to the named route
+    redirect: { name: 'Login' } // Redirect to the named route
   },
 
   {

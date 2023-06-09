@@ -25,6 +25,7 @@
     import axios from '../axiosConfig';
 
     export default {
+
         methods: {
 
             login() {
@@ -38,10 +39,12 @@
                     // Handle successful login
                     const result = response.data;
                     if(result != 'success'){
-                        alert(result);
+                      alert(result);
                     }
                     else{
-                        alert('success');
+                      this.$router.push('/Index');
+                      this.$store.commit('setUsername', data.username);
+                      alert('success');
                     }
                 })
                 .catch(error => {

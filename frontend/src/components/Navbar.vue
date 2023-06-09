@@ -3,6 +3,7 @@
       <ul>
         <li @click="navigateTo('Index')" :class="{ active: currentPage === 'Index' }">Index</li>
         <li @click="navigateTo('AccountManagement')" :class="{ active: currentPage === 'AccountManagement' }">AccountManagement</li>
+        <li @click="navigateTo('Login')" >Logout</li>
       </ul>
     </nav>
   </template>
