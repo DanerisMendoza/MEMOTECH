@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/createUser', 'App\Http\Controllers\ApiController@createUser');
 
+Route::post('/loginUser', 'App\Http\Controllers\ApiController@loginUser');
+
 Route::get('/viewUser', 'App\Http\Controllers\ApiController@viewUser');
 
 Route::delete('/deleteAllUser', 'App\Http\Controllers\ApiController@deleteAllUser');

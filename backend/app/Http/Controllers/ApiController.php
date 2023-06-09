@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User; 
 use App\Events\user_tb_data; 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class ApiController extends Controller
@@ -22,7 +24,7 @@ class ApiController extends Controller
     public function createUser(Request $request){
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'regex:/^[A-Za-z0-9]+$/','unique:user_tb,username'],
-            'password' => 'required|min:8',
+            'password' => 'required|min:3',
         ]);
         
         if ($validator->fails()) {
@@ -32,10 +34,25 @@ class ApiController extends Controller
 
         $User = new User();
         $User->username = $request->input('username');
-        $User->password = $request->input('password');
+        $User->password = bcrypt($request->input('password'));
         $User->save();
         broadcast(new user_tb_data());
         return 'success';
+    }
+
+    public function loginUser(Request $request){
+        $credentials = $request->only('username', 'password');
+
+        $user = User::where('username', $credentials['username'])->first();
+    
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            // Authentication successful
+            return 'success';
+        } else {
+            // Authentication failed
+            return 'invalid';
+        }
+     
     }
 
     public function viewUser(){
