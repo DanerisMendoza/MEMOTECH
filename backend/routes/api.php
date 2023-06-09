@@ -22,3 +22,4 @@ Route::post('/createUser', 'App\Http\Controllers\ApiController@createUser');
 
 Route::get('/viewUser', 'App\Http\Controllers\ApiController@viewUser');
 
+Route::delete('/deleteAllUser', 'App\Http\Controllers\ApiController@deleteAllUser');

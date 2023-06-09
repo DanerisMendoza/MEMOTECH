@@ -26,9 +26,7 @@ class user_tb_data implements ShouldBroadcast
 
     public function broadcastWith(){
         $User = User::all();
-        return[
-            'result' => $User
-        ];
+        return['result' => $User];
     }
 
     /**

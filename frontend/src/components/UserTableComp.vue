@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="btn btn-danger" @click="resetTb">Reset Table</button>
         <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -44,6 +45,14 @@
                     console.error(error);
                 });
             },
+
+            resetTb() {
+                axios.delete('/api/deleteAllUser')
+                    .catch(error => {
+                        console.error(error);
+                    });
+            },
+
 
         },
 

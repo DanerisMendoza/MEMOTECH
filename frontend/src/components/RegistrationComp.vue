@@ -20,13 +20,17 @@
 
                 axios.post('/api/createUser', data)
                     .then(response => {
-                        // Handle success response
-                        console.log('Insert Success!');
+                        const result = response.data;
+                        if(result != 'success'){
+                            alert(result);
+                        }
+                        else{
+                            alert('success');
+                        }
                     })
                     .catch(error => {
-                        // Handle error response
-                        console.error(error);
-                    });
+                        console.error('Error:', error.response);
+                });
             },
         }
     }
