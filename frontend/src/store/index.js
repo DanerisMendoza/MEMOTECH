@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    username: null
+    username: localStorage.getItem('username')
   },
 
   getters: {
@@ -12,6 +12,7 @@ const store = createStore({
   mutations: {
     setUsername: (state, newUsername) => {
       state.username = newUsername;
+      localStorage.setItem('username', newUsername);
     }
   }
 });

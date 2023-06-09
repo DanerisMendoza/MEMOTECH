@@ -44,7 +44,7 @@
                     else{
                       this.$router.push('/Index');
                       this.$store.commit('setUsername', data.username);
-                      alert('success');
+                      alert('valid');
                     }
                 })
                 .catch(error => {

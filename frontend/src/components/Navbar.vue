@@ -3,7 +3,7 @@
       <ul>
         <li @click="navigateTo('Index')" :class="{ active: currentPage === 'Index' }">Index</li>
         <li @click="navigateTo('AccountManagement')" :class="{ active: currentPage === 'AccountManagement' }">AccountManagement</li>
-        <li @click="navigateTo('Login')" >Logout</li>
+        <li @click="navigateTo('Login'); clearUsername()" >Logout</li>
       </ul>
     </nav>
   </template>
@@ -26,6 +26,9 @@
     methods: {
       navigateTo(page) {
         this.$router.push({ name: page });
+      },
+      clearUsername(){
+        this.$store.commit('setUsername', null);
       }
     }
   };
