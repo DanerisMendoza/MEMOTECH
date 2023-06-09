@@ -2,7 +2,7 @@
     <div>
         <Navbar/>
         <h1>Index Page</h1>
-        <h1>Hi, {{ this.$store.getters.getUsername}}!</h1>
+        <h1>Hi, {{username}}!</h1>
     </div>
 </template>
 
@@ -10,6 +10,11 @@
  import Navbar from '../components/Navbar.vue';
 
  export default {
+  data() {
+    return {
+      username: localStorage.getItem('username')
+    }
+  },
   mounted() {
     window.addEventListener('storage', this.handleStorageChange);
   },
@@ -19,11 +24,11 @@
   methods: {
     handleStorageChange(event) {
       if (event.key === 'username') {
-        const newUsername = event.newValue;
-        this.$store.commit('setUsername', newUsername);
+        this.username = event.newValue;
       }
     }
   },
+
     name: 'App',
     components: { Navbar},
   }

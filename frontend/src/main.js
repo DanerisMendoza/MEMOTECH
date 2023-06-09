@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
-import store from './store'
 
 window.Pusher = Pusher;
 window.Echo = new Echo({
@@ -20,5 +19,4 @@ window.Echo = new Echo({
 
 const app = createApp(App);
 app.use(router);
-app.use(store)
 app.mount('#app')

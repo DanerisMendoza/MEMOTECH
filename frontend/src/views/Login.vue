@@ -42,8 +42,8 @@
                       alert(result);
                     }
                     else{
+                      localStorage.setItem('username',data.username);
                       this.$router.push('/Index');
-                      this.$store.commit('setUsername', data.username);
                       alert('valid');
                     }
                 })

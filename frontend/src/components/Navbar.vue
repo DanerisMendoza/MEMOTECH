@@ -28,7 +28,8 @@
         this.$router.push({ name: page });
       },
       clearUsername(){
-        this.$store.commit('setUsername', null);
+        localStorage.setItem('username',null);
+        
       }
     }
   };
