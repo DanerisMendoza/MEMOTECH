@@ -10,6 +10,20 @@
  import Navbar from '../components/Navbar.vue';
 
  export default {
+  mounted() {
+    window.addEventListener('storage', this.handleStorageChange);
+  },
+  destroyed() {
+    window.removeEventListener('storage', this.handleStorageChange);
+  },
+  methods: {
+    handleStorageChange(event) {
+      if (event.key === 'username') {
+        const newUsername = event.newValue;
+        this.$store.commit('setUsername', newUsername);
+      }
+    }
+  },
     name: 'App',
     components: { Navbar},
   }
