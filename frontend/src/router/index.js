@@ -13,13 +13,15 @@ const routes = [
   {
     path: '/Index',
     name: 'Index',
-    component: Index
+    component: Index,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/AccountManagement',
     name: 'AccountManagement',
-    component: AccountManagement
+    component: AccountManagement,
+    meta: { requiresAuth: true }
   },
 
   {
@@ -32,6 +34,25 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+});
+
+
+router.beforeEach((to, from, next) => {
+  const username = localStorage.getItem('username');
+  //checking if there is active account redirect to login if none
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if(username == 'null'){
+      next({ name: 'Login' });
+      return;
+    }
+  }
+  // checking if account is already logged in
+  else{
+    if(username != 'null'){
+      next({ name: 'Index' });
+    }
+  } 
+  next();
 });
 
 

@@ -24,7 +24,13 @@
   methods: {
     handleStorageChange(event) {
       if (event.key === 'username') {
-        this.username = event.newValue;
+        const newUsername = event.newValue;
+        this.username = newUsername
+        localStorage.setItem('username',newUsername);
+        if(newUsername == 'null'){
+          console.log('not login');
+          this.$router.push('/');
+        }
       }
     }
   },
