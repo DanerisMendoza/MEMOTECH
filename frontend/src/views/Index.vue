@@ -8,8 +8,15 @@
 
 <script>
  import Navbar from '../components/Navbar.vue';
+ import { emitter } from '../eventBus';
 
  export default {
+  created() {
+    emitter.on('user_data_changed', this.user_data_changed);
+  },
+  beforeUnmount() {
+    emitter.off('user_data_changed', this.user_data_changed);
+  },
   mounted() {
     window.addEventListener('storage', this.handleStorageChange);
   },
@@ -22,6 +29,9 @@
         const newUsername = event.newValue;
         this.$store.commit('setUsername', newUsername);
       }
+    },
+    user_data_changed(){
+      console.log('user_data_changed');
     }
   },
     name: 'App',
