@@ -30,8 +30,8 @@
         this.$store.commit('setUsername', newUsername);
       }
     },
-    user_data_changed(){
-      console.log('user_data_changed');
+    user_data_changed(newUsername){
+      console.log(newUsername);
     }
   },
     name: 'App',

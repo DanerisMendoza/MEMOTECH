@@ -14,7 +14,7 @@ const store = createStore({
     setUsername: (state, newUsername) => {
       state.username = newUsername;
       localStorage.setItem('username', newUsername);
-      emitter.emit("user_data_changed");
+      emitter.emit("user_data_changed",newUsername);
     }
   }
 });
