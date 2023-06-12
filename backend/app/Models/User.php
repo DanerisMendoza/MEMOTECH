@@ -11,4 +11,6 @@ class User extends Model
     // use HasFactory;
     protected $table = 'user_tb';
     protected $fillable = ['username', 'password'];
+    protected $primaryKey = 'user_id';
+
 }

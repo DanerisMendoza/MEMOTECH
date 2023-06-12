@@ -10,15 +10,15 @@
             </button>
         </template>
         <template v-slot:content>
-          <label for="username">New Username:</label>
+          <label for="username">Enter New Username(Optional):</label>
           <br>
           <input type="text" v-model="selectedUser.username">
           <br>
-          <label for="password">New Password:</label>
+          <label for="password">Enter New or Current Password(Required):</label>
           <br>
-          <input type="password" v-model="selectedUser.password">
+          <input type="password" ref="password">
           <br><br>
-          <button class="btn btn-warning" @click="updateUser">Update</button>
+          <button class="btn btn-warning" @click="updateUserInfo">Update</button>
         </template>
       </PopupModal>
 
@@ -26,6 +26,7 @@
         <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th>user_id</th>
             <th>username</th>
             <th>Password</th>
             <th>created_at</th>
@@ -34,6 +35,7 @@
         </thead>
         <tbody>
         <tr v-for="user in users" :key="user.id">
+            <td>{{ user.user_id }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.password }}</td>
             <td>{{ user.created_at }}</td>
@@ -59,9 +61,8 @@
                 isModal: false,
                 users: [],
                 selectedUser: {
-                  id: '',
+                  user_id: '',
                   username: '',
-                  password: ''
                 }
             }
         },
@@ -88,9 +89,28 @@
             },
             // local functions
             editUser(user){
-              this.selectedUser.id = user.id;
+              this.selectedUser.user_id = user.user_id;
               this.selectedUser.username = user.username;
               this.isModal = true;
+            },
+            updateUserInfo(){
+              if(this.$refs.password.value == ''){
+                alert('Password is Required');
+                return;
+              }
+
+              axios.put('/api/updateUserByUser_id',{
+                user_id:this.selectedUser.user_id,
+                username:this.selectedUser.username,
+                password:this.$refs.password.value
+              }).then(response => {
+                  if(response.data == 'success'){
+                    alert('update success!');
+                  }
+                })
+                .catch(error => {
+                  console.error(error);
+                });
             },
             closeModal(){
               this.isModal = false;

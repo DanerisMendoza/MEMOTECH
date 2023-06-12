@@ -69,4 +69,14 @@ class ApiController extends Controller
         return response()->json(['message' => 'All users have been deleted']);
     }
     
+    public function updateUserByUser_id(Request $request){
+        $User = User::where('user_id',$request->input('user_id'))->first();
+        $User ->username = $request->input('username');
+        $User ->password = bcrypt($request->input('password'));
+        $User->save();
+        broadcast(new user_tb_data());
+        return 'success';
+    }
+
+
 }
