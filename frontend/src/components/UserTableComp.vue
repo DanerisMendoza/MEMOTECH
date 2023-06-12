@@ -1,17 +1,24 @@
 <template>
     <div>
-      <PopupModal>
+      <PopupModal v-if="isModal">
         <template v-slot:title>
           <h2>EDIT USER</h2>
+        </template>
+        <template v-slot:closeButton>
+           <button type="button" class="btn btn-secondary" @click="closeModal">
+              <span>&times; </span>
+            </button>
         </template>
         <template v-slot:content>
           <label for="username">New Username:</label>
           <br>
-          <input type="text" id="username">
+          <input type="text" v-model="selectedUser.username">
           <br>
           <label for="password">New Password:</label>
           <br>
-          <input type="password" id="password">
+          <input type="password" v-model="selectedUser.password">
+          <br><br>
+          <button class="btn btn-warning" @click="updateUser">Update</button>
         </template>
       </PopupModal>
 
@@ -49,6 +56,7 @@
         },
         data(){
             return{
+                isModal: false,
                 users: [],
                 selectedUser: {
                   id: '',
@@ -80,9 +88,13 @@
             },
             // local functions
             editUser(user){
-              // eventBus.$emit('open-modal');
-              console.log('trigger to open modal');
-            }
+              this.selectedUser.id = user.id;
+              this.selectedUser.username = user.username;
+              this.isModal = true;
+            },
+            closeModal(){
+              this.isModal = false;
+            },
 
         },
 

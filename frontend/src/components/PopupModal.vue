@@ -1,17 +1,17 @@
 <template>
   <div>
-    <button class="btn btn-primary" @click="openModal">Open Modal</button>
-
-    <div v-if="isModalOpen" class="modal show" tabindex="-1" role="dialog">
+    <div class="modal show" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header text-center">
             <h5 class="modal-title mx-auto">
               <slot name="title">Modal Title</slot>
             </h5>
-            <button type="button" class="btn btn-secondary" @click="closeModal">
-              <span>&times;</span>
-            </button>
+            
+           
+            <slot name="closeButton"></slot>
+
+
           </div>
           <div class="modal-body">
             <slot name="content">Modal Content</slot>
@@ -26,29 +26,7 @@
 
 
 <script>
-import Vue from 'vue';
-export default {
-  data() {
-    return {
-      isModalOpen: false
-    };
-  },
-  
-  created() {
-    // this.$root.$on('open-modal', () => {
-    //   this.isModalOpen = true;
-    // });
-  },
-
-  methods: {
-    openModal() {
-      this.isModalOpen = true;
-    },
-    closeModal() {
-      this.isModalOpen = false;
-    }
-  }
-};
+export default {};
 </script>
 
 <style scoped>
