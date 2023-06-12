@@ -1,5 +1,20 @@
 <template>
     <div>
+      <PopupModal>
+        <template v-slot:title>
+          <h2>EDIT USER</h2>
+        </template>
+        <template v-slot:content>
+          <label for="username">New Username:</label>
+          <br>
+          <input type="text" id="username">
+          <br>
+          <label for="password">New Password:</label>
+          <br>
+          <input type="password" id="password">
+        </template>
+      </PopupModal>
+
         <button class="btn btn-danger" @click="resetTb">Reset Table</button>
         <table class="table table-bordered table-striped">
         <thead>
@@ -16,6 +31,7 @@
             <td>{{ user.password }}</td>
             <td>{{ user.created_at }}</td>
             <td>{{ user.updated_at }}</td>
+            <td><button @click="editUser(user)" class="btn btn-warning">Edit</button></td>
         </tr>
         </tbody>
     </table>
@@ -24,19 +40,29 @@
 
 <script>
     import axios from '../axiosConfig';
-
+    import PopupModal from './PopupModal.vue';
+    
     export default{
+
         created(){
             this.fetchStudents();
         },
         data(){
             return{
                 users: [],
+                selectedUser: {
+                  id: '',
+                  username: '',
+                  password: ''
+                }
             }
+        },
+        components: {
+          PopupModal
         },
 
         methods: {
-            
+            // functions that call laravel api
             fetchStudents() {
                 axios.get('/api/viewUser').then(response => {
                     this.users = response.data;
@@ -52,7 +78,11 @@
                         console.error(error);
                     });
             },
-
+            // local functions
+            editUser(user){
+              // eventBus.$emit('open-modal');
+              console.log('trigger to open modal');
+            }
 
         },
 
