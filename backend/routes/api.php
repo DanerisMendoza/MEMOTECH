@@ -27,3 +27,5 @@ Route::post('/loginUser', 'App\Http\Controllers\ApiController@loginUser');
 Route::get('/viewUser', 'App\Http\Controllers\ApiController@viewUser');
 
 Route::delete('/deleteAllUser', 'App\Http\Controllers\ApiController@deleteAllUser');
+
+Route::delete('/deleteUserByUser_id', 'App\Http\Controllers\ApiController@deleteUserByUser_id');

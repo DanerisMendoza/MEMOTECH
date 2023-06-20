@@ -68,6 +68,15 @@ class ApiController extends Controller
         broadcast(new user_tb_data());
         return response()->json(['message' => 'All users have been deleted']);
     }
+
+    public function deleteUserByUser_id(Request $request){
+        $User = User::where('user_id',$request->input('user_id'))->first();
+        if($User){
+            $User->delete();
+            broadcast(new user_tb_data());
+        }
+        return response()->json('success');
+    }
     
     public function updateUserByUser_id(Request $request){
         $User = User::where('user_id',$request->input('user_id'))->first();
@@ -77,6 +86,5 @@ class ApiController extends Controller
         broadcast(new user_tb_data());
         return 'success';
     }
-
 
 }

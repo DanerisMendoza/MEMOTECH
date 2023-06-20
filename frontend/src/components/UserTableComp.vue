@@ -33,9 +33,10 @@
             <td>{{ user.user_id }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.password }}</td>
-            <td>{{ user.created_at }}</td>
-            <td>{{ user.updated_at }}</td>
+            <td>{{ new Date(user.created_at).toLocaleString() }}</td>
+            <td>{{ new Date(user.updated_at).toLocaleString() }}</td>
             <td><button @click="editUser(user)" class="btn btn-warning">Edit</button></td>
+            <td><button @click="deleteUser(user)" class="btn btn-danger">Delete</button></td>
         </tr>
         </tbody>
     </table>
@@ -107,6 +108,22 @@
                   console.error(error);
                 });
             },
+
+            // Axios does not support sending request bodies with DELETE requests by default.
+            deleteUser(user) {
+            axios.delete('/api/deleteUserByUser_id', { 
+              data: { user_id: user.user_id } 
+            })
+              .then(response => {
+                // Success: handle the response
+                alert(response.data);
+              })
+              .catch(error => {
+                // Error: handle the error
+                console.error(error);
+              });
+}
+
         },
 
         mounted(){
