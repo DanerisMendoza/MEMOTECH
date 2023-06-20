@@ -26,7 +26,9 @@
 export default {
   created() {
     this.channel = new BroadcastChannel('modalTrigger');
-    this.channel.onmessage = () => {
+    this.channel.onmessage = (event) => {
+      /*to access event message*/
+      console.log(event.data);
       this.modalShow = true;
     };
   },
