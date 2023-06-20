@@ -1,13 +1,8 @@
 <template>
     <div>
-      <PopupModal v-if="isModal">
+      <PopupModal>
         <template v-slot:title>
           <h2>EDIT USER</h2>
-        </template>
-        <template v-slot:closeButton>
-           <button type="button" class="btn btn-secondary" @click="closeModal">
-              <span>&times; </span>
-            </button>
         </template>
         <template v-slot:content>
           <label for="username">Enter New Username(Optional):</label>
@@ -55,10 +50,10 @@
 
         created(){
             this.fetchStudents();
+            this.channel = new BroadcastChannel('modalTrigger');
         },
         data(){
             return{
-                isModal: false,
                 users: [],
                 selectedUser: {
                   user_id: '',
@@ -89,6 +84,7 @@
             },
             // local functions
             editUser(user){
+              this.channel.postMessage('modalTrigger');
               this.selectedUser.user_id = user.user_id;
               this.selectedUser.username = user.username;
               this.isModal = true;
@@ -112,18 +108,12 @@
                   console.error(error);
                 });
             },
-            closeModal(){
-              this.isModal = false;
-            },
-
         },
 
         mounted(){
-
         window.Echo.channel('channel-user_tb_data').listen('user_tb_data',(e) => {
             this.users = e.result;
         });
-
         },
 
 

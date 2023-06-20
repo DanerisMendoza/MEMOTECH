@@ -1,22 +1,19 @@
 <template>
   <div>
-    <div class="modal show" tabindex="-1" role="dialog">
+    <div v-if="modalShow" class="modal show" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header text-center">
             <h5 class="modal-title mx-auto">
               <slot name="title">Modal Title</slot>
             </h5>
-            
-           
-            <slot name="closeButton"></slot>
-
-
+            <button type="button" class="btn btn-secondary" @click="closeModal">
+              <span>&times; </span>
+            </button>
           </div>
           <div class="modal-body">
             <slot name="content">Modal Content</slot>
           </div>
-
         </div>
       </div>
     </div>
@@ -26,7 +23,27 @@
 
 
 <script>
-export default {};
+export default {
+  created() {
+    this.channel = new BroadcastChannel('modalTrigger');
+    this.channel.onmessage = () => {
+      this.modalShow = true;
+    };
+  },
+  beforeDestroy() {
+    this.channel.close();
+  },
+  data(){
+    return{
+      modalShow: false,
+    }
+  },
+  methods:{
+    closeModal(){
+      this.modalShow = false;
+    }
+  }
+};
 </script>
 
 <style scoped>
