@@ -25,15 +25,12 @@
 <script>
 export default {
   created() {
-    this.channel = new BroadcastChannel('modalTrigger');
-    this.channel.onmessage = (event) => {
-      /*to access event message*/
-      console.log(event.data);
+    this.emitter.on("editUserModal", () => {
       this.modalShow = true;
-    };
+    });
   },
   beforeDestroy() {
-    this.channel.close();
+    this.emitter.off("editUserModal");
   },
   data(){
     return{

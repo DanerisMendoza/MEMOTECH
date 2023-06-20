@@ -84,10 +84,9 @@
             },
             // local functions
             editUser(user){
-              this.channel.postMessage('modalTrigger');
               this.selectedUser.user_id = user.user_id;
               this.selectedUser.username = user.username;
-              this.isModal = true;
+              this.emitter.emit("editUserModal");
             },
             updateUserInfo(){
               if(this.$refs.password.value == ''){

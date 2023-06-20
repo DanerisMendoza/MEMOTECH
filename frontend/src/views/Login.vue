@@ -26,11 +26,7 @@
 
     export default {
 
-        created(){
-          console.log(localStorage.getItem('username'));
-        },
-
-        methods: {
+      methods: {
 
             login() {
                 const data = {
