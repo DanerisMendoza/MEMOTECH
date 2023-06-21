@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar/>
+        <Navbar :navType="'admin'"/>
         <h1>Account Management Page</h1>
         <RegistrationComp :role="'admin'" />
         <UserTableComp/>

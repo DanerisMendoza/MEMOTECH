@@ -1,8 +1,12 @@
 <template>
     <nav>
-      <ul>
+      <ul v-if="navType == 'admin'">
         <li @click="navigateTo('adminIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
         <li @click="navigateTo('AccountManagement')" :class="{ active: currentPage === 'AccountManagement' }">AccountManagement</li>
+        <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
+      </ul>
+      <ul v-if="navType == 'user'">
+        <li @click="navigateTo('userIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
         <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
       </ul>
     </nav>
@@ -10,6 +14,13 @@
   
   <script>
   export default {
+    props: {
+        navType: {
+        type: String,
+        required: true
+        }
+    },
+
     data() {
       return {
         currentPage: null

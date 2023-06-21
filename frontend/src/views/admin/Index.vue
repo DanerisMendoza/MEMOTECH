@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar/>
+        <Navbar :navType="'admin'"/>
         <h1>Index Page</h1>
         <h1>Hi, {{username}}!</h1>
     </div>
