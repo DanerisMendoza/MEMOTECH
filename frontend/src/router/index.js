@@ -3,6 +3,7 @@ import AccountManagement from '../views/admin/AccountManagement.vue'
 import adminIndex from '../views/admin/Index.vue'
 import userRegistration from '../views/user/registration.vue'
 import userIndex from '../views/user/Index.vue'
+import deck from '../views/user/deck.vue'
 import Login from '../views/Login.vue'
 
 
@@ -32,6 +33,13 @@ const routes = [
     path: '/userIndex',
     name: 'userIndex',
     component: userIndex,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/deck',
+    name: 'deck',
+    component: deck,
     meta: { requiresAuth: true }
   },
 

@@ -7,6 +7,7 @@
       </ul>
       <ul v-if="navType == 'user'">
         <li @click="navigateTo('userIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
+        <li @click="navigateTo('deck')" :class="{ active: currentPage === 'deck' }">Deck</li>
         <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
       </ul>
     </nav>
