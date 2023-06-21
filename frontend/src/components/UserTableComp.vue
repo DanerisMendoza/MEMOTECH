@@ -32,7 +32,7 @@
         <tbody>
         <tr v-for="user in users" :key="user.id">
             <td>{{ user.user_id }}</td>
-            <td>{{ user.role }}</td>
+            <td>*{{ user.role }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.password }}</td>
             <td>{{ new Date(user.created_at).toLocaleString() }}</td>

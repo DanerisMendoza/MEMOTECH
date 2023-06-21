@@ -14,6 +14,7 @@
                   <input type="password" class="form-control" ref="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary" @click="login">Login</button>
+                <button type="submit" class="btn btn-secondary" @click="registration">Registration</button>
             </div>
           </div>
         </div>
@@ -69,6 +70,10 @@
                     console.error('Error:', error.response);
                 });
             },
+
+            registration(){
+              this.$router.push('/userRegistration');
+            }
         },
     };
     </script>
