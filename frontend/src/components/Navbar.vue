@@ -1,12 +1,12 @@
 <template>
     <nav>
       <ul v-if="navType == 'admin'">
-        <li @click="navigateTo('adminIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
+        <li @click="navigateTo('adminIndex')" :class="{ active: currentPage === 'adminIndex' }">Index</li>
         <li @click="navigateTo('AccountManagement')" :class="{ active: currentPage === 'AccountManagement' }">AccountManagement</li>
         <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
       </ul>
       <ul v-if="navType == 'user'">
-        <li @click="navigateTo('userIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
+        <li @click="navigateTo('userIndex')" :class="{ active: currentPage === 'userIndex' }">Index</li>
         <li @click="navigateTo('deck')" :class="{ active: currentPage === 'deck' }">Deck</li>
         <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
       </ul>
