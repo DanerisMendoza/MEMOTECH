@@ -11,11 +11,18 @@
     import axios from '../axiosConfig';
 
     export default {
+        props: {
+            role: {
+            type: String,
+            required: true
+            }
+        },
         methods: {
             submit() {
                 const data = {
                     username: this.$refs.username.value,
-                    password: this.$refs.password.value
+                    password: this.$refs.password.value,
+                    role:this.role,
                 };
 
                 axios.post('/api/createUser', data)

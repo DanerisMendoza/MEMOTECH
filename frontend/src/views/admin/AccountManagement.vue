@@ -2,15 +2,15 @@
     <div>
         <Navbar/>
         <h1>Account Management Page</h1>
-        <RegistrationComp/>
+        <RegistrationComp :role="'admin'" />
         <UserTableComp/>
     </div>
 </template>
 
 <script>
- import Navbar from '../components/Navbar.vue';
- import RegistrationComp from '../components/RegistrationComp.vue';
- import UserTableComp from '../components/UserTableComp.vue';
+ import Navbar from '../../components/Navbar.vue';
+ import RegistrationComp from '../../components/RegistrationComp.vue';
+ import UserTableComp from '../../components/UserTableComp.vue';
 
  export default {
     name: 'App',

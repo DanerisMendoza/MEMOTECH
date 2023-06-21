@@ -27,6 +27,12 @@
     export default {
 
       methods: {
+            data(){
+              return{
+                username: null,
+                role: null,
+              }
+            },
 
             login() {
                 const data = {
@@ -38,12 +44,23 @@
                 .then(response => {
                     // Handle successful login
                     const result = response.data;
-                    if(result != 'success'){
+                    if(result == 'invalid'){
                       alert(result);
                     }
                     else{
-                      localStorage.setItem('username',data.username);
-                      this.$router.push('/Index');
+                      //login success
+                      this.username = response.data.username;
+                      this.role = response.data.role;
+                      localStorage.setItem('username',this.username);
+                      localStorage.setItem('role',this.role);
+                      //admin 
+                      if(this.role == 'admin'){
+                        this.$router.push('/adminIndex');
+                      }
+                      //user
+                      else if(this.role == 'user'){
+                        this.$router.push('/userIndex');
+                      }
                       alert('valid');
                     }
                 })

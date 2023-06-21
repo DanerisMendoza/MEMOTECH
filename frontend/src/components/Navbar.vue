@@ -1,9 +1,9 @@
 <template>
     <nav>
       <ul>
-        <li @click="navigateTo('Index')" :class="{ active: currentPage === 'Index' }">Index</li>
+        <li @click="navigateTo('adminIndex')" :class="{ active: currentPage === 'Index' }">Index</li>
         <li @click="navigateTo('AccountManagement')" :class="{ active: currentPage === 'AccountManagement' }">AccountManagement</li>
-        <li @click="navigateTo('Login'); clearUsername()" >Logout</li>
+        <li @click="navigateTo('Login'); clearUserInfo()" >Logout</li>
       </ul>
     </nav>
   </template>
@@ -27,9 +27,9 @@
       navigateTo(page) {
         this.$router.push({ name: page });
       },
-      clearUsername(){
+      clearUserInfo(){
         localStorage.setItem('username',null);
-        
+        localStorage.setItem('role',null);
       }
     }
   };

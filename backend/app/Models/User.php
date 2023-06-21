@@ -10,7 +10,7 @@ class User extends Model
 {
     // use HasFactory;
     protected $table = 'user_tb';
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['username', 'password','role'];
     protected $primaryKey = 'user_id';
 
 }

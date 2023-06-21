@@ -32,10 +32,11 @@ class ApiController extends Controller
             return $errorMessages[0];
         }
 
-        $User = new User();
-        $User->username = $request->input('username');
-        $User->password = bcrypt($request->input('password'));
-        $User->save();
+        $user = new User();
+        $user->username = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
+        $user->role = $request->input('role');
+        $user->save();
         broadcast(new user_tb_data());
         return 'success';
     }
@@ -47,7 +48,7 @@ class ApiController extends Controller
     
         if ($user && Hash::check($credentials['password'], $user->password)) {
             // Authentication successful
-            return 'success';
+            return response()->json($user);
         } else {
             // Authentication failed
             return 'invalid';
@@ -56,8 +57,8 @@ class ApiController extends Controller
     }
 
     public function viewUser(){
-        $User = User::all();
-        return response()->json($User);
+        $user = User::all();
+        return response()->json($user);
     }
 
     //If an error occurs during the execution of the truncate method, it will throw an exception and halt the execution of the code. 
@@ -70,19 +71,19 @@ class ApiController extends Controller
     }
 
     public function deleteUserByUser_id(Request $request){
-        $User = User::where('user_id',$request->input('user_id'))->first();
-        if($User){
-            $User->delete();
+        $user = User::where('user_id',$request->input('user_id'))->first();
+        if($user){
+            $user->delete();
             broadcast(new user_tb_data());
         }
         return response()->json('success');
     }
     
     public function updateUserByUser_id(Request $request){
-        $User = User::where('user_id',$request->input('user_id'))->first();
-        $User ->username = $request->input('username');
-        $User ->password = bcrypt($request->input('password'));
-        $User->save();
+        $user = User::where('user_id',$request->input('user_id'))->first();
+        $user ->username = $request->input('username');
+        $user ->password = bcrypt($request->input('password'));
+        $user->save();
         broadcast(new user_tb_data());
         return 'success';
     }

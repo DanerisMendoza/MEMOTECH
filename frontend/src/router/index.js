@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AccountManagement from '../views/AccountManagement.vue'
-import Index from '../views/Index.vue'
+import AccountManagement from '../views/admin/AccountManagement.vue'
+import adminIndex from '../views/admin/Index.vue'
 import Login from '../views/Login.vue'
 
 
@@ -11,9 +11,9 @@ const routes = [
   },
 
   {
-    path: '/Index',
-    name: 'Index',
-    component: Index,
+    path: '/adminIndex',
+    name: 'adminIndex',
+    component: adminIndex,
     meta: { requiresAuth: true }
   },
 
@@ -38,18 +38,21 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  const username = localStorage.getItem('username');
+  const role = localStorage.getItem('role');
   //checking if there is active account redirect to login if none
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if(username == 'null'){
+    if(role == 'null'){
       next({ name: 'Login' });
       return;
     }
   }
   // checking if account is already logged in
   else{
-    if(username != 'null'){
-      next({ name: 'Index' });
+    if(role != 'null'){
+      if(role == 'admin'){
+        next({ name: 'adminIndex' });
+        return;
+      }
     }
   } 
   next();
