@@ -32,6 +32,7 @@
               return{
                 username: null,
                 role: null,
+                user_id: null,
               }
             },
 
@@ -52,8 +53,12 @@
                       //login success
                       this.username = response.data.username;
                       this.role = response.data.role;
+                      this.user_id = response.data.user_id;
+
                       localStorage.setItem('username',this.username);
                       localStorage.setItem('role',this.role);
+                      localStorage.setItem('user_id',this.user_id);
+
                       //admin 
                       if(this.role == 'admin'){
                         this.$router.push('/adminIndex');

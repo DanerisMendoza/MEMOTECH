@@ -18,6 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//user
+
 Route::post('/createUser', 'App\Http\Controllers\ApiController@createUser');
 
 Route::put('/updateUserByUser_id', 'App\Http\Controllers\ApiController@updateUserByUser_id');
@@ -29,3 +31,9 @@ Route::get('/viewUser', 'App\Http\Controllers\ApiController@viewUser');
 Route::delete('/deleteAllUser', 'App\Http\Controllers\ApiController@deleteAllUser');
 
 Route::delete('/deleteUserByUser_id', 'App\Http\Controllers\ApiController@deleteUserByUser_id');
+
+//category
+
+Route::post('/createCategory', 'App\Http\Controllers\ApiController@createCategory');
+
+Route::get('/viewCategory', 'App\Http\Controllers\ApiController@viewCategory');

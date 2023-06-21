@@ -42,6 +42,7 @@
       clearUserInfo(){
         localStorage.setItem('username',null);
         localStorage.setItem('role',null);
+        localStorage.setItem('user_id',null);
       }
     }
   };

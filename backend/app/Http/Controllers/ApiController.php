@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User; 
+use App\Models\Category; 
 use App\Events\user_tb_data; 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +87,19 @@ class ApiController extends Controller
         $user->save();
         broadcast(new user_tb_data());
         return 'success';
+    }
+
+    public function createCategory(Request $request){
+        $category = new Category();
+        $category -> user_id = $request->input('user_id');
+        $category -> category = $request->input('category');
+        $category -> save();
+        return 'success';
+    }
+
+    public function viewCategory(){
+        $category = Category::all();
+        return response()->json($category);
     }
 
 }
