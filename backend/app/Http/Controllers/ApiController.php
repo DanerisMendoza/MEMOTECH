@@ -9,6 +9,7 @@ use App\Events\user_tb_data;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class ApiController extends Controller
@@ -100,6 +101,38 @@ class ApiController extends Controller
     public function viewCategory(){
         $category = Category::all();
         return response()->json($category);
+    }
+
+    /* Note: 
+     you cannot send data using the GET method and receive it as a request in Laravel 
+     without modifying the URL.
+    */
+    
+    public function viewCategoryByUserId(Request $request){
+        $user_id = $request->input('user_id'); 
+        $category = Category::where('user_id',$user_id)->get();
+        return response()->json($category);
+    }
+
+    // joining of table user and category
+    public function viewUserCategory(){
+        $userCategory = DB::table('user_tb')
+        ->join('category_tb', 'user_tb.user_id', '=', 'category_tb.user_id')
+        ->select('user_tb.*', 'category_tb.*')
+        ->get();
+
+        return response()->json($userCategory);
+    }
+
+    // joining of table user and category with where clause (experiment)
+    public function viewUserCategoryUser_id(){
+        $userCategory = DB::table('user_tb')
+        ->join('category_tb', 'user_tb.user_id', '=', 'category_tb.user_id')
+        ->select('user_tb.*', 'category_tb.*')
+        ->where('user_tb.user_id', '=', 2)
+        ->get();
+
+        return response()->json($userCategory);
     }
 
 }

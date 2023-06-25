@@ -37,3 +37,9 @@ Route::delete('/deleteUserByUser_id', 'App\Http\Controllers\ApiController@delete
 Route::post('/createCategory', 'App\Http\Controllers\ApiController@createCategory');
 
 Route::get('/viewCategory', 'App\Http\Controllers\ApiController@viewCategory');
+
+Route::get('/viewCategoryByUserId', 'App\Http\Controllers\ApiController@viewCategoryByUserId');
+
+Route::get('/viewUserCategory', 'App\Http\Controllers\ApiController@viewUserCategory');
+
+Route::get('/viewUserCategoryUser_id', 'App\Http\Controllers\ApiController@viewUserCategoryUser_id');

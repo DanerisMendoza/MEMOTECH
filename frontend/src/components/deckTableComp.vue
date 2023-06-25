@@ -66,15 +66,25 @@
           PopupModal
         },
 
+        /* Note: 
+        you cannot send data using the GET method and receive it as a request in Laravel 
+        without modifying the URL.
+        */
+
         methods: {
             // functions that call laravel api
             fetchStudents() {
-                axios.get('/api/viewCategory').then(response => {
-                  this.categories = response.data;
-                })
-                .catch(error => {
+                const data = {
+                    user_id: localStorage.getItem('user_id')
+                };
+                const url = '/api/viewCategoryByUserId' + '?' + new URLSearchParams(data).toString();
+                axios.get(url)
+                  .then(response => {
+                    this.categories = response.data;
+                  })
+                  .catch(error => {
                     console.error(error);
-                });
+                  });
             },
 
             resetTb() {
