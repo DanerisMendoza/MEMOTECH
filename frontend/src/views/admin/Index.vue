@@ -18,10 +18,11 @@
   mounted() {
     window.addEventListener('storage', this.handleStorageChange);
   },
-  destroyed() {
+  beforeUnmount() {
     window.removeEventListener('storage', this.handleStorageChange);
   },
   methods: {
+    //listen when local storage change and logout when new username is 'null'
     handleStorageChange(event) {
       if (event.key === 'username') {
         const newUsername = event.newValue;
